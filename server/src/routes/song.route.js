@@ -1,11 +1,16 @@
-import { Router } from 'express';
-import { getAllSongs, getFeaturedSongs, getMadeForYouSongs, getSongById, getTrendingSongs } from '../controllers/song.controller';
-import { protectRoute, requireAdmin } from '../middlewares/auth.middleware';
-
+import { Router } from "express";
+import {
+  getAllSongs,
+  getFeaturedSongs,
+  getMadeForYouSongs,
+  getSongById,
+  getTrendingSongs,
+} from "../controllers/song.controller.js";
+import { protectRoute, requireAdmin } from "../middlewares/auth.middleware.js";
 
 const songRouter = Router();
 
-songRouter.get("/", protectRoute, requireAdmin,getAllSongs)
+songRouter.get("/", protectRoute, requireAdmin, getAllSongs);
 songRouter.get("/:id", getSongById);
 songRouter.get("/featured", getFeaturedSongs);
 songRouter.get("/made-for-you", getMadeForYouSongs);

@@ -1,7 +1,7 @@
-import Album from "../models/album.model";
+import Album from "../models/album.model.js";
 
 export const getAllAlbums = async (req, res, next) => {
-  try{
+  try {
     // Fetch all albums and populate the songs field
     const albums = await Album.find().populate("songs");
     res.status(200).json(albums);
@@ -20,7 +20,7 @@ export const getAlbumById = async (req, res, next) => {
       return res.status(404).json({ message: "Album not found" });
     }
     res.status(200).json(album);
-  } catch(error) {
+  } catch (error) {
     console.error("Error fetching album by ID:", error);
     next(error);
   }
