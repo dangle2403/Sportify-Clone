@@ -7,13 +7,16 @@ import statsRouter from "./routes/stats.route.js";
 import songRouter from "./routes/song.route.js";
 import albumRouter from "./routes/album.route.js";
 import connectDB from "./libs/db.js";
+import { clerkMiddleware } from '@clerk/express'
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(express.json());
+app.use(express.json()); // to parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
+app.use(clerkMiddleware()) // this will add auth to the req obj => req.auth.userId
 
 app.use("/api/users", userRouter);
 app.use("/api/admin", adminRouter);
