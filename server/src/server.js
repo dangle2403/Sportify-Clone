@@ -11,6 +11,7 @@ import albumRouter from "./routes/album.route.js";
 import connectDB from "./libs/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import fileUpload from "express-fileupload";
+import cors from "cors";
 
 const __dirname = path.resolve();
 
@@ -18,7 +19,12 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
-
+app.use(
+  cors({
+    origin: "http://localhost:5000",
+    credentials: true, // Allow credentials to be sent
+  })
+); // Enable CORS for all routes
 app.use(express.json()); // to parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware()); // this will add auth to the req obj => req.auth.userId

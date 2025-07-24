@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage/Homepage.tsx";
 import AuthCallbackPage from "./pages/authCallback/AuthCallbackPage.tsx";
+import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
 
 const App = () => {
 
@@ -9,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
-        <Route path="/" element={<Homepage />} />
+        <Route path="/sso-callback" element={<AuthenticateWithRedirectCallback signUpForceRedirectUrl={"/auth-callback"} />} />
       </Routes>
     </>
   );
