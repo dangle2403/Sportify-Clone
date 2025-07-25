@@ -11,7 +11,6 @@ const LeftLayout = () => {
   useEffect(() => {
     fetchAlbums();
   }, [fetchAlbums]);
-  console.log("Albums:", albums);
   return (
     <div className="flex flex-col h-full p-2 bg-zinc-900/75 gap-2">
       <div className="flex flex-col w-full">
@@ -43,19 +42,27 @@ const LeftLayout = () => {
         </div>
         <ScrollArea className="h-[calc(100vh-300px)]">
           <div className="space-y-2">
-            {isLoading ? <PlaylistSkeleton /> : (
+            {isLoading ? (
+              <PlaylistSkeleton />
+            ) : (
               albums.map((album) => (
-                <Link 
-                  to={`/albums/${album.id}`}
+                <Link
+                  to={`/albums/${album._id}`}
                   key={album._id}
                   className="p-2 hover:bg-zinc-800 rounded-md flex items-center gap-3 cursor-pointer"
                 >
-                  <img src={album.imageURL} alt="album image" className="size-12 rounded-md flex-shrink-0"/>
+                  <img
+                    src={album.imageURL}
+                    alt="album image"
+                    className="size-12 rounded-md flex-shrink-0"
+                  />
                   <div className="flex-1 min-w-0 hidden md:block">
                     <h3 className="font-md text-white truncate">
                       {album.title}
                     </h3>
-                    <p className="text-sm text-zinc-400 truncate">Album ● {album.artist}</p>
+                    <p className="text-sm text-zinc-400 truncate">
+                      Album ● {album.artist}
+                    </p>
                   </div>
                 </Link>
               ))
